@@ -11,15 +11,17 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var textView: UITextView!
-    
     @IBOutlet weak var textViewButtomConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var stepper: UIStepper!
-    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         textView.delegate = self
+        
+        textView.isHidden = true
+        textView.alpha = 0
+        
         
        // textView.text = ""
         
@@ -34,6 +36,11 @@ class ViewController: UIViewController {
         stepper.backgroundColor = .gray
         stepper.layer.cornerRadius = 5
         
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.color = .gray
+        activityIndicator.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents() //пока идет загрузка, интерфес не доступен
+        
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(updateTextView(notification:)),
                                                name: UIResponder.keyboardWillShowNotification,
@@ -43,6 +50,14 @@ class ViewController: UIViewController {
                                                selector: #selector(updateTextView(notification:)),
                                                name: UIResponder.keyboardWillHideNotification,
                                                object: nil)
+        
+        UIView.animate(withDuration: 0, delay: 5, options: .curveLinear,
+                       animations: { self.textView.alpha = 1 })
+        { (finished ) in
+            self.activityIndicator.stopAnimating()
+            self.textView.isHidden = false
+            UIApplication.shared.endIgnoringInteractionEvents() // загрузка закончена, интерфейс доступен
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -101,7 +116,7 @@ extension ViewController: UITextViewDelegate {
         
         
         
-        return textView.text.count + (text.count - range.length) <= 60
+        return textView.text.count + (text.count - range.length) <= 2000
     }
 }
 
