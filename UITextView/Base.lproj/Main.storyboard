@@ -43,6 +43,9 @@ The appearance of the keyboard itself can be customized using the properties pro
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="aoq-W7-vp5">
                                 <rect key="frame" x="197" y="438" width="20" height="20"/>
                             </activityIndicatorView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fCx-py-vD2">
+                                <rect key="frame" x="20" y="194" width="374" height="4"/>
+                            </progressView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.5" green="0.85957358620383528" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -50,12 +53,15 @@ The appearance of the keyboard itself can be customized using the properties pro
                             <constraint firstItem="aoq-W7-vp5" firstAttribute="centerX" secondItem="urK-dg-mkI" secondAttribute="centerX" id="As2-GS-jVv"/>
                             <constraint firstItem="urK-dg-mkI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Crn-tP-U4v"/>
                             <constraint firstItem="n4V-2q-L3X" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="62" id="Evn-DK-lO1"/>
+                            <constraint firstItem="fCx-py-vD2" firstAttribute="centerX" secondItem="urK-dg-mkI" secondAttribute="centerX" id="GZ7-Uv-W8k"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="urK-dg-mkI" secondAttribute="trailing" constant="20" id="Mvm-Ad-Sgq"/>
+                            <constraint firstItem="fCx-py-vD2" firstAttribute="top" secondItem="urK-dg-mkI" secondAttribute="top" id="R3S-0Z-1v8"/>
                             <constraint firstItem="aoq-W7-vp5" firstAttribute="centerY" secondItem="urK-dg-mkI" secondAttribute="centerY" id="RdU-cC-QnX"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="BGY-gT-c12" secondAttribute="trailing" constant="38" id="ZvU-N9-RZn"/>
                             <constraint firstItem="n4V-2q-L3X" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="53" id="aqg-Fq-xjk"/>
                             <constraint firstItem="urK-dg-mkI" firstAttribute="top" secondItem="n4V-2q-L3X" secondAttribute="bottom" constant="67" id="c1v-ft-FLD"/>
                             <constraint firstItem="BGY-gT-c12" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="62" id="ft1-Nc-2wx"/>
+                            <constraint firstItem="fCx-py-vD2" firstAttribute="width" secondItem="urK-dg-mkI" secondAttribute="width" id="oGL-wt-i61"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="n4V-2q-L3X" secondAttribute="trailing" constant="350" id="r0C-qR-02T"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="urK-dg-mkI" secondAttribute="bottom" constant="160" id="xrj-67-cwZ"/>
                         </constraints>
@@ -63,6 +69,7 @@ The appearance of the keyboard itself can be customized using the properties pro
                     <connections>
                         <outlet property="activityIndicator" destination="aoq-W7-vp5" id="7jk-E2-lPO"/>
                         <outlet property="countLabel" destination="n4V-2q-L3X" id="OHc-bn-8ny"/>
+                        <outlet property="progressView" destination="fCx-py-vD2" id="eR8-Tx-B28"/>
                         <outlet property="stepper" destination="BGY-gT-c12" id="uKn-1A-uFB"/>
                         <outlet property="textView" destination="urK-dg-mkI" id="2cJ-ux-mTu"/>
                         <outlet property="textViewButtomConstraint" destination="xrj-67-cwZ" id="IY9-si-aqB"/>

@@ -14,13 +14,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var textViewButtomConstraint: NSLayoutConstraint!
     @IBOutlet weak var stepper: UIStepper!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var progressView: UIProgressView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         textView.delegate = self
         
         textView.isHidden = true
-        textView.alpha = 0
+       
         
         
        // textView.text = ""
@@ -39,7 +40,9 @@ class ViewController: UIViewController {
         activityIndicator.hidesWhenStopped = true
         activityIndicator.color = .gray
         activityIndicator.startAnimating()
-        UIApplication.shared.beginIgnoringInteractionEvents() //пока идет загрузка, интерфес не доступен
+        
+        progressView.setProgress(0, animated: true)
+
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(updateTextView(notification:)),
@@ -51,12 +54,16 @@ class ViewController: UIViewController {
                                                name: UIResponder.keyboardWillHideNotification,
                                                object: nil)
         
-        UIView.animate(withDuration: 0, delay: 5, options: .curveLinear,
-                       animations: { self.textView.alpha = 1 })
-        { (finished ) in
-            self.activityIndicator.stopAnimating()
-            self.textView.isHidden = false
-            UIApplication.shared.endIgnoringInteractionEvents() // загрузка закончена, интерфейс доступен
+        
+        
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            if self.progressView.progress != 1 {
+                self.progressView.progress += 0.2
+            } else {
+                self.activityIndicator.stopAnimating()
+                self.textView.isHidden = false
+                self.progressView.isHidden = true
+            }
         }
     }
     
